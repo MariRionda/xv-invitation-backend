@@ -1,0 +1,7 @@
+{
+    "editor.suggest.showWords": true,
+    "editor.suggest.showKeywords": true,
+    "editor.suggest.matchOnWordStartOnly": false,
+    "editor.wordBasedSuggestions": true,
+    "editor.suggest.localityBonus": true
+}

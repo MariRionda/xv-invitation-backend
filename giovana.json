@@ -1,0 +1,29 @@
+{
+    "guests":[
+        {
+            "name":"Sergio Andres",
+            "state":"No confirmó",
+            "phone":"+5493875185752"
+        },
+        {
+            "name":"Mariana Rionda",
+            "state":"No confirmó",
+            "phone":"+5493874736563"
+        },
+        {
+            "name":"Sofia Reyes",
+            "state":"No confirmó",
+            "phone":"+5493875198543"
+        },
+        {
+            "name":"Pablo Figueroa",
+            "state":"No confirmó",
+            "phone":"+5493875188854"
+        },
+        {
+            "name":"Andres Gutierrez",
+            "state":"No confirmó",
+            "phone":"+5493874587194"
+        }
+    ]
+}
