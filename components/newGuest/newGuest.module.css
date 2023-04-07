@@ -1,0 +1,77 @@
+.form{
+    width: 350px;
+    display: flex;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #e7c6c6;
+    border-radius: 5%;
+    padding: 5%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    height: 250px;
+}
+.stitle{
+    font-size: 13px;
+}
+.sselect{
+    font-size: 17px;
+    height: 10px;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 50px;
+    width: 100%;
+    height: 100vh;
+    background-color: #fff;
+    }
+    
+    .inputWrapper {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    }
+    
+    .label {
+    font-size: 14px;
+    color:#333;
+    }
+    
+    .input {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    color: #333;
+    background-color: #ddd;
+    height: 30px;
+    }
+    
+    .button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: #ffd1dc;
+    color: #333;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    }
+    
+    .button:hover {
+    background-color: #c7b6d7;
+    }
+    .divList{
+    color: #333;
+    text-align: center;
+    }
+    .List{
+        text-align: left;
+        width: 400px;
+        display: flex;
+        margin: 3px;
+    }
+

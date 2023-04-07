@@ -1,0 +1,81 @@
+/*!*********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[2].oneOf[8].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[2].oneOf[8].use[3]!./components/newGuest/newGuest.module.css ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************/
+.newGuest_form__2vg9_{
+    width: 350px;
+    display: flex;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #e7c6c6;
+    border-radius: 5%;
+    padding: 5%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    height: 250px;
+}
+.newGuest_stitle__0NQyT{
+    font-size: 13px;
+}
+.newGuest_sselect__42rIw{
+    font-size: 17px;
+    height: 10px;
+}
+.newGuest_container__Wy9e5 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 50px;
+    width: 100%;
+    height: 100vh;
+    background-color: #fff;
+    }
+    
+    .newGuest_inputWrapper__RSnEv {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    }
+    
+    .newGuest_label__uBmjO {
+    font-size: 14px;
+    color:#333;
+    }
+    
+    .newGuest_input__rlri3 {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    color: #333;
+    background-color: #ddd;
+    height: 30px;
+    }
+    
+    .newGuest_button__QONMp {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: #ffd1dc;
+    color: #333;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    }
+    
+    .newGuest_button__QONMp:hover {
+    background-color: #c7b6d7;
+    }
+    .newGuest_divList__vaCGv{
+    color: #333;
+    text-align: center;
+    }
+    .newGuest_List__v3NAl{
+        text-align: left;
+        width: 400px;
+        display: flex;
+        margin: 3px;
+    }
+
+

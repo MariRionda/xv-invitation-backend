@@ -1,0 +1,66 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #b09494;
+  border-radius: 10px;
+  height: 100dvh;
+}
+
+.title {
+  font-size: 28px;
+  color: #ffcccc;
+  margin-bottom: 20px;
+}
+
+.label {
+  font-size: 14px;
+  color: #ffcccc;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.input {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  color: black;
+  border-radius: 5px;
+  border: none;
+  background-color: #e8e0e0;
+  margin-top: 5px;
+}
+
+.passwordContainer {
+  display: flex;
+  align-items: center;
+}
+
+.showPasswordButton {
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  color: #ffcccc;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.submitButton {
+  background-color: #ffcccc;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submitButton:hover {
+  background-color: #ffc2c2;
+}
