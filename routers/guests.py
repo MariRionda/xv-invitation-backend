@@ -58,6 +58,22 @@ async def get_guests():
     except Exception as e:
         print(e)
         return {"message":"Ocurrió un error inesperado ","status_code":400}
+
+# Define la ruta GET para obtener un invitado por nombre
+@router.get("/{name}")
+async def get_guest_by_name(name: str):
+    try:
+        # Realiza una consulta en la colección "guests" para buscar el invitado por su nombre
+        doc_ref = db.collection('guests').where('name', '==', name).get()
+        if len(doc_ref) == 0:
+            return {"message": "No se encontró el invitado especificado", "status_code": 404}
+        # Convierte los datos del documento a un diccionario
+        guest = doc_ref[0].to_dict()
+        print(guest)
+        return guest
+    except Exception as e:
+        print(e)
+        return {"message": "Ocurrió un error inesperado", "status_code": 400}
     
 # Define la ruta DELETE para eliminar un invitado por su ID
 @router.delete("/{guest_id}")
