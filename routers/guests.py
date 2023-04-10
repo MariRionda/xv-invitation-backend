@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Request
 from db import get_database
 from typing import List
 from models import Guest
@@ -74,6 +74,28 @@ async def get_guest_by_name(name: str):
     except Exception as e:
         print(e)
         return {"message": "Ocurrió un error inesperado", "status_code": 400}
+
+# Define la ruta PUT para actualizar las propiedades "state" y "amount_confirm" de un invitado por nombre
+@router.put("/")
+async def update_guest(guest: Guest):
+    try:
+        # Busque el documento del invitado por su nombre
+        query = db.collection('guests').where('name', '==', guest.name)
+        docs = query.stream()
+
+        # Actualice los campos 'state' y 'amount_confirm' del invitado y guarde el documento
+        for doc in docs:
+            doc_ref = db.collection('guests').document(doc.id)
+            doc_ref.update({
+                'state': guest.state,
+                'amount_confirm': guest.amount_confirm
+            })
+            return {'msg': 'Los campos han sido actualizados correctamente'}
+        
+        # Si no se encuentra el documento del invitado, devuelva un error 404
+        raise HTTPException(status_code=404, detail='Invitado no encontrado')
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
     
 # Define la ruta DELETE para eliminar un invitado por su ID
 @router.delete("/{guest_id}")
