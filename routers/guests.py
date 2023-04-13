@@ -55,7 +55,8 @@ async def get_guests():
             guest = doc.to_dict()
             # Agrega el diccionario a la lista de compras
             guests.append(guest)
-        return guests
+        ordered_guests = sorted(guests, key=lambda x: (x['lastname'], x['firstname']))
+        return ordered_guests
     except Exception as e:
         print(e)
         return {"message":"Ocurrió un error inesperado ","status_code":400}
