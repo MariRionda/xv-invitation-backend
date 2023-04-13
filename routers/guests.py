@@ -31,7 +31,8 @@ async def create_guest(guest: Guest):
         doc_ref = db.collection('guests').document(id_str)
         doc_ref.set({
             'id': new_id,
-            'name': guest.name,
+            'firstname': guest.firstname,
+            'lastname': guest.lastname,
             'state': guest.state,
             'phone': guest.phone,
             'amount_guests': guest.amount_guests,
@@ -60,11 +61,11 @@ async def get_guests():
         return {"message":"Ocurrió un error inesperado ","status_code":400}
 
 # Define la ruta GET para obtener un invitado por nombre
-@router.get("/{name}")
-async def get_guest_by_name(name: str):
+@router.get("/{lastname}-{firstname}")
+async def get_guest_by_name(firstname: str, lastname: str):
     try:
-        # Realiza una consulta en la colección "guests" para buscar el invitado por su nombre
-        doc_ref = db.collection('guests').where('name', '==', name).get()
+        # Realiza una consulta en la colección "guests" para buscar el invitado por su nombre y apellido
+        doc_ref = db.collection('guests').where('firstname', '==', firstname).where('lastname', '==', lastname).get()
         if len(doc_ref) == 0:
             return {"message": "No se encontró el invitado especificado", "status_code": 404}
         # Convierte los datos del documento a un diccionario
@@ -75,12 +76,13 @@ async def get_guest_by_name(name: str):
         print(e)
         return {"message": "Ocurrió un error inesperado", "status_code": 400}
 
+
 # Define la ruta PUT para actualizar las propiedades "state" y "amount_confirm" de un invitado por nombre
 @router.put("/")
 async def update_guest(guest: Guest):
     try:
         # Busque el documento del invitado por su nombre
-        query = db.collection('guests').where('name', '==', guest.name)
+        query = db.collection('guests').where('firstname', '==', guest.firstname).where('lastname', '==', guest.lastname)
         docs = query.stream()
 
         # Actualice los campos 'state' y 'amount_confirm' del invitado y guarde el documento
