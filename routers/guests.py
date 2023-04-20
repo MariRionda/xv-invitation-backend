@@ -60,6 +60,57 @@ async def get_guests():
     except Exception as e:
         print(e)
         return {"message":"Ocurrió un error inesperado ","status_code":400}
+    
+@router.get("/attend")
+async def get_guests():
+    try:
+        guests = []
+        # Obtiene solo los documentos de la colección "guests" donde "state" es igual a "Asistiré"
+        docs = db.collection('guests').where('state', '==', 'Asistiré').get()
+        for doc in docs:
+            # Convierte los datos del documento a un diccionario
+            guest = doc.to_dict()
+            # Agrega el diccionario a la lista de invitados
+            guests.append(guest)
+        ordered_guests = sorted(guests, key=lambda x: (x['lastname'], x['firstname']))
+        return ordered_guests
+    except Exception as e:
+        print(e)
+        return {"message":"Ocurrió un error inesperado ","status_code":400}
+
+@router.get("/notAttend")
+async def get_guests():
+    try:
+        guests = []
+        # Obtiene solo los documentos de la colección "guests" donde "state" es igual a "No asistiré"
+        docs = db.collection('guests').where('state', '==', 'No asistiré').get()
+        for doc in docs:
+            # Convierte los datos del documento a un diccionario
+            guest = doc.to_dict()
+            # Agrega el diccionario a la lista de invitados
+            guests.append(guest)
+        ordered_guests = sorted(guests, key=lambda x: (x['lastname'], x['firstname']))
+        return ordered_guests
+    except Exception as e:
+        print(e)
+        return {"message":"Ocurrió un error inesperado ","status_code":400}
+    
+@router.get("/notConfirm")
+async def get_guests():
+    try:
+        guests = []
+        # Obtiene solo los documentos de la colección "guests" donde "state" es igual a "No confirmó"
+        docs = db.collection('guests').where('state', '==', 'No confirmó').get()
+        for doc in docs:
+            # Convierte los datos del documento a un diccionario
+            guest = doc.to_dict()
+            # Agrega el diccionario a la lista de invitados
+            guests.append(guest)
+        ordered_guests = sorted(guests, key=lambda x: (x['lastname'], x['firstname']))
+        return ordered_guests
+    except Exception as e:
+        print(e)
+        return {"message":"Ocurrió un error inesperado ","status_code":400}
 
 # Define la ruta GET para obtener un invitado por nombre
 @router.get("/{lastname}-{firstname}")
