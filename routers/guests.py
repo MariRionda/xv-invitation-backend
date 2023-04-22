@@ -61,7 +61,7 @@ async def get_guests():
         print(e)
         return {"message":"Ocurrió un error inesperado ","status_code":400}
     
-@router.get("/{name}")
+@router.get("/name/{name}")
 async def get_guests_by_name(name: str):
     try:
         guests = []
@@ -81,7 +81,7 @@ async def get_guests_by_name(name: str):
         return {"message":"Ocurrió un error inesperado ","status_code":400}
     
 @router.get("/attend")
-async def get_guests():
+async def get_guests_attend():
     try:
         guests = []
         # Obtiene solo los documentos de la colección "guests" donde "state" es igual a "Asistiré"
@@ -98,7 +98,7 @@ async def get_guests():
         return {"message":"Ocurrió un error inesperado ","status_code":400}
 
 @router.get("/notAttend")
-async def get_guests():
+async def get_guests_not_attend():
     try:
         guests = []
         # Obtiene solo los documentos de la colección "guests" donde "state" es igual a "No asistiré"
@@ -115,7 +115,7 @@ async def get_guests():
         return {"message":"Ocurrió un error inesperado ","status_code":400}
     
 @router.get("/notConfirm")
-async def get_guests():
+async def get_guests_not_confirm():
     try:
         guests = []
         # Obtiene solo los documentos de la colección "guests" donde "state" es igual a "No confirmó"
