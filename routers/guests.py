@@ -41,6 +41,24 @@ async def create_guest(guest: Guest):
         return {'msg': 'El invitado ha sido creado correctamente'}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+    
+#Le paso firstname y lastname por body y devuelve el ID del invitado
+@router.post("/id")
+async def get_guest_id_by_name(guest_info: dict):
+    try:
+        firstname = guest_info.get('firstname')
+        lastname = guest_info.get('lastname')
+
+        # Realiza una consulta en la colección "guests" para buscar el invitado por su nombre y apellido
+        doc_ref = db.collection('guests').where('firstname', '==', firstname).where('lastname', '==', lastname).get()
+        if len(doc_ref) == 0:
+            return {"message": "No se encontró el invitado especificado", "status_code": 404}
+        guest_id = doc_ref[0].id
+        return {"id": guest_id}
+    except Exception as e:
+        print(e)
+        return {"message": "Ocurrió un error inesperado", "status_code": 400}
+
 
 # Define la ruta GET para obtener todos los invitados
 # Ruta GET para obtener todos los clientes
@@ -113,7 +131,7 @@ async def get_guests():
         return {"message":"Ocurrió un error inesperado ","status_code":400}
 
 # Define la ruta GET para obtener un invitado por nombre
-@router.get("/{lastname}-{firstname}")
+@router.get("/{lastname} {firstname}")
 async def get_guest_by_name(firstname: str, lastname: str):
     try:
         # Realiza una consulta en la colección "guests" para buscar el invitado por su nombre y apellido
@@ -122,6 +140,22 @@ async def get_guest_by_name(firstname: str, lastname: str):
             return {"message": "No se encontró el invitado especificado", "status_code": 404}
         # Convierte los datos del documento a un diccionario
         guest = doc_ref[0].to_dict()
+        print(guest)
+        return guest
+    except Exception as e:
+        print(e)
+        return {"message": "Ocurrió un error inesperado", "status_code": 400}
+
+#Devuelve el invitado por ID 
+@router.get("/{id}")
+async def get_guest_by_id(id: str):
+    try:
+        # Realiza una consulta en la colección "guests" para buscar el invitado por su ID
+        doc_ref = db.collection('guests').document(id).get()
+        if not doc_ref.exists:
+            return {"message": "No se encontró el invitado especificado", "status_code": 404}
+        # Convierte los datos del documento a un diccionario
+        guest = doc_ref.to_dict()
         print(guest)
         return guest
     except Exception as e:
