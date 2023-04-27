@@ -80,56 +80,32 @@ async def get_guests_by_name(name: str):
         print(e)
         return {"message":"Ocurrió un error inesperado ","status_code":400}
     
-@router.get("/attend")
-async def get_guests_attend():
-    try:
-        guests = []
-        # Obtiene solo los documentos de la colección "guests" donde "state" es igual a "Asistiré"
-        docs = db.collection('guests').where('state', '==', 'Asistiré').get()
-        for doc in docs:
-            # Convierte los datos del documento a un diccionario
-            guest = doc.to_dict()
-            # Agrega el diccionario a la lista de invitados
-            guests.append(guest)
-        ordered_guests = sorted(guests, key=lambda x: (x['lastname'], x['firstname']))
-        return ordered_guests
-    except Exception as e:
-        print(e)
-        return {"message":"Ocurrió un error inesperado ","status_code":400}
 
-@router.get("/notAttend")
+@router.get("/list")
 async def get_guests_not_attend():
     try:
         guests = []
+        response = {'attend':[], 'not_attend':[], 'not_confirm':[]} 
         # Obtiene solo los documentos de la colección "guests" donde "state" es igual a "No asistiré"
-        docs = db.collection('guests').where('state', '==', 'No asistiré').get()
+        docs = db.collection('guests').get()
         for doc in docs:
             # Convierte los datos del documento a un diccionario
             guest = doc.to_dict()
             # Agrega el diccionario a la lista de invitados
             guests.append(guest)
         ordered_guests = sorted(guests, key=lambda x: (x['lastname'], x['firstname']))
-        return ordered_guests
+        for guest in ordered_guests:
+            if guest['state']=='Asistiré':
+                response['attend'].append(guest)
+            if guest['state']=='No asistiré':
+                response['not_attend'].append(guest)
+            if guest['state']=='No confirmó':
+                response['not_confirm'].append(guest)
+        return response
     except Exception as e:
         print(e)
         return {"message":"Ocurrió un error inesperado ","status_code":400}
-    
-@router.get("/notConfirm")
-async def get_guests_not_confirm():
-    try:
-        guests = []
-        # Obtiene solo los documentos de la colección "guests" donde "state" es igual a "No confirmó"
-        docs = db.collection('guests').where('state', '==', 'No confirmó').get()
-        for doc in docs:
-            # Convierte los datos del documento a un diccionario
-            guest = doc.to_dict()
-            # Agrega el diccionario a la lista de invitados
-            guests.append(guest)
-        ordered_guests = sorted(guests, key=lambda x: (x['lastname'], x['firstname']))
-        return ordered_guests
-    except Exception as e:
-        print(e)
-        return {"message":"Ocurrió un error inesperado ","status_code":400}
+  
 
 # Define la ruta PUT para actualizar las propiedades "state" y "amount_confirm" de un invitado por nombre
 @router.put("/")
