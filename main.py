@@ -9,7 +9,8 @@ origins = [
     "http://localhost",
     "http://localhost:3000",
     "https://xv-invitation-front.vercel.app",
-    "https://wedding-invitation-front.vercel.app"
+    "https://wedding-invitation-front.vercel.app",
+    "https://wedding-invitation-front-2.vercel.app/"
 ]
 
 app.add_middleware(
