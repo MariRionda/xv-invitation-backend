@@ -10,6 +10,8 @@ class Guest(BaseModel):
     phone: str
     amount_guests:int
     amount_confirm: int
+    menu: str
+    music: str
 
 class GuestGet(BaseModel):
     id: int
@@ -19,3 +21,5 @@ class GuestGet(BaseModel):
     phone: str
     amount_guests:int
     amount_confirm: int
+    menu: str
+    music: str

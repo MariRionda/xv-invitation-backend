@@ -35,7 +35,9 @@ async def create_guest(guest: Guest, collection:str = Header(...)):
             'state': guest.state,
             'phone': guest.phone,
             'amount_guests': guest.amount_guests,
-            'amount_confirm': guest.amount_confirm
+            'amount_confirm': guest.amount_confirm,
+            'menu': guest.amount_confirm,
+            'music': guest.amount_confirm,
         })
         return {'msg': 'El invitado ha sido creado correctamente'}
     except Exception as e:
@@ -122,6 +124,48 @@ async def update_guest(guest: Guest, collection:str = Header(...)):
                 'amount_confirm': guest.amount_confirm
             })
             return {'msg': 'Los campos han sido actualizados correctamente'}
+        
+        # Si no se encuentra el documento del invitado, devuelva un error 404
+        raise HTTPException(status_code=404, detail='Invitado no encontrado')
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+    
+# Define la ruta PUT para actualizar la propiedad "music" de un invitado por nombre
+@router.put("/music")
+async def update_guest(guest: Guest, collection:str = Header(...)):
+    try:
+        # Busque el documento del invitado por su nombre
+        query = db.collection(collection).where('firstname', '==', guest.firstname).where('lastname', '==', guest.lastname)
+        docs = query.stream()
+
+        # Actualice el campo 'music' del invitado y guarde el documento
+        for doc in docs:
+            doc_ref = db.collection(collection).document(doc.id)
+            doc_ref.update({
+                'music': guest.music
+            })
+            return {'msg': 'El campo music ha sido actualizado correctamente'}
+        
+        # Si no se encuentra el documento del invitado, devuelva un error 404
+        raise HTTPException(status_code=404, detail='Invitado no encontrado')
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+    
+# Define la ruta PUT para actualizar la propiedad "menu" de un invitado por nombre
+@router.put("/menu")
+async def update_guest(guest: Guest, collection:str = Header(...)):
+    try:
+        # Busque el documento del invitado por su nombre
+        query = db.collection(collection).where('firstname', '==', guest.firstname).where('lastname', '==', guest.lastname)
+        docs = query.stream()
+
+        # Actualice el campo 'menu' del invitado y guarde el documento
+        for doc in docs:
+            doc_ref = db.collection(collection).document(doc.id)
+            doc_ref.update({
+                'menu': guest.menu
+            })
+            return {'msg': 'El campo menu ha sido actualizado correctamente'}
         
         # Si no se encuentra el documento del invitado, devuelva un error 404
         raise HTTPException(status_code=404, detail='Invitado no encontrado')
